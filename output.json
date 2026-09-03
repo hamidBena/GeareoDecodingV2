@@ -1,0 +1,1249 @@
+{
+  "version": "0.7.1-demo+134-26.221",
+  "parts": {
+    "lastId": 83,
+    "entities": [
+      {
+        "key": "box",
+        "id": 1,
+        "data": {
+          "width": 0.5,
+          "height": 0.5,
+          "depth": 0.5,
+          "color": "#BF9558",
+          "material": "wod",
+          "name": "cube",
+          "_c": [
+            0.0,
+            2.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "cylinder",
+        "id": 2,
+        "data": {
+          "segments": 24,
+          "snapPoint": 4,
+          "height": 0.5,
+          "topRadius": 0.25,
+          "bottomRadius": 0.25,
+          "color": "#BF9558",
+          "material": "wod",
+          "name": "cylinder#2",
+          "_c": [
+            -0.625,
+            2.0,
+            0.0,
+            90.0,
+            270.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "sphere",
+        "id": 5,
+        "data": {
+          "radius": 0.25,
+          "color": "#BF9558",
+          "material": "wod",
+          "name": "sphere#5",
+          "_c": [
+            -1.25,
+            2.0,
+            0.0,
+            90.0,
+            270.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "slope",
+        "id": 10,
+        "data": {
+          "width": 0.5,
+          "depth": 0.5,
+          "slope": 45.0,
+          "color": "#BF9558",
+          "material": "wod",
+          "name": "slope#10",
+          "_c": [
+            0.0,
+            2.0,
+            -0.375,
+            90.0,
+            180.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "prism",
+        "id": 13,
+        "data": {
+          "width": 0.5,
+          "height": 0.5,
+          "depth": 0.5,
+          "color": "#BF9558",
+          "material": "wod",
+          "name": "prism#13",
+          "_c": [
+            -0.625,
+            1.99999988,
+            -0.6228612,
+            90.0,
+            180.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "bearing",
+        "id": 16,
+        "data": {
+          "height": 0.25,
+          "top": 0.25,
+          "bottom": 0.0,
+          "radius": 0.25,
+          "shaftRadius": 0.125,
+          "useMotor": false,
+          "channel": 1,
+          "freeSpin": false,
+          "velocity": 1000,
+          "torque": 1.0,
+          "inverted": false,
+          "oneway": false,
+          "detent": 0,
+          "auto": false,
+          "forwardKey": 63,
+          "backwardKey": 64,
+          "color": "#FFC486",
+          "shaftColor": "#FFEBC2",
+          "bodyShape": 0,
+          "material": "wod",
+          "shaftMaterial": "stl",
+          "name": "bearing#16",
+          "_c": [
+            -0.3156071,
+            0.124999844,
+            -0.890976965,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "bearing",
+        "id": 20,
+        "data": {
+          "height": 0.25,
+          "top": 0.25,
+          "bottom": 0.0,
+          "radius": 0.25,
+          "shaftRadius": 0.125,
+          "useMotor": true,
+          "channel": 1,
+          "freeSpin": false,
+          "velocity": 1000,
+          "torque": 1.0,
+          "inverted": false,
+          "oneway": false,
+          "detent": 0,
+          "auto": false,
+          "forwardKey": 63,
+          "backwardKey": 64,
+          "color": "#FFC486",
+          "shaftColor": "#FFEBC2",
+          "bodyShape": 0,
+          "material": "wod",
+          "shaftMaterial": "stl",
+          "name": "bearing#20",
+          "_c": [
+            -0.292901337,
+            0.124999724,
+            -1.561303,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "linear_bearing",
+        "id": 22,
+        "data": {
+          "width": 0.375,
+          "height": 0.25,
+          "length": 1.0,
+          "top": 0.25,
+          "bottom": 0.0,
+          "shaftPosition": 0.0,
+          "useMotor": false,
+          "channel": 1,
+          "freeMove": false,
+          "velocity": 2.0,
+          "force": 1.0,
+          "inverted": false,
+          "auto": false,
+          "forwardKey": 63,
+          "backwardKey": 64,
+          "color": "#FFC486",
+          "shaftColor": "#FFEBC2",
+          "material": "wod",
+          "shaftMaterial": "stl",
+          "name": "linear_bearing#22",
+          "_c": [
+            -1.06278932,
+            0.124999844,
+            -0.615957141,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "linear_bearing",
+        "id": 24,
+        "data": {
+          "width": 0.375,
+          "height": 0.25,
+          "length": 1.0,
+          "top": 0.25,
+          "bottom": 0.0,
+          "shaftPosition": 0.0,
+          "useMotor": true,
+          "channel": 1,
+          "freeMove": false,
+          "velocity": 2.0,
+          "force": 1.0,
+          "inverted": false,
+          "auto": false,
+          "forwardKey": 63,
+          "backwardKey": 64,
+          "color": "#FFC486",
+          "shaftColor": "#FFEBC2",
+          "material": "wod",
+          "shaftMaterial": "stl",
+          "name": "linear_bearing#24",
+          "_c": [
+            -1.63147473,
+            0.124999635,
+            -0.5579576,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "ring bearing",
+        "id": 26,
+        "data": {
+          "height": 0.25,
+          "top": 0.25,
+          "bottom": 0.0,
+          "radius": 0.25,
+          "innerRadius": 0.125,
+          "color": "#FFC486",
+          "topColor": "#FFEBC2",
+          "bottomColor": "#FFEBC2",
+          "material": "wod",
+          "topMaterial": "stl",
+          "bottomMaterial": "stl",
+          "name": "ring bearing#26",
+          "_c": [
+            -0.296940655,
+            0.124999918,
+            -2.21830153,
+            -6.830199E-06,
+            -2.91188421E-18,
+            -3.2568876E-12
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "spur_gear",
+        "id": 28,
+        "data": {
+          "height": 0.25,
+          "teeth": 19,
+          "skip": 0,
+          "innerRadius": 0.125,
+          "color": "#FFC486",
+          "material": "stl",
+          "hole": false,
+          "inlay": "spk",
+          "module": 2,
+          "name": "spur_gear#28",
+          "_c": [
+            1.0827055,
+            0.124999449,
+            -0.7732018,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "bevel_gear",
+        "id": 30,
+        "data": {
+          "height": 0.25,
+          "teeth": 19,
+          "skip": 0,
+          "innerRadius": 0.125,
+          "angle": 45.0,
+          "color": "#FFC486",
+          "material": "stl",
+          "inlay": "spk",
+          "hole": false,
+          "module": 2,
+          "name": "bevel_gear#30",
+          "_c": [
+            1.08040273,
+            0.124999508,
+            -1.69404,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "linear_gear",
+        "id": 32,
+        "data": {
+          "teeth": 19,
+          "height": 0.25,
+          "width": 0.25,
+          "color": "#FFC486",
+          "material": "stl",
+          "module": 2,
+          "name": "linear_gear#32",
+          "_c": [
+            1.179979,
+            0.12499965,
+            -2.478521,
+            -1.02452841E-05,
+            90.0,
+            90.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "worm_gear",
+        "id": 35,
+        "data": {
+          "radius": 0.25,
+          "teeth": 5,
+          "hole": false,
+          "innerRadius": 0.125,
+          "inverted": false,
+          "module": 2,
+          "color": "#FFC486",
+          "material": "stl",
+          "name": "worm_gear#35",
+          "_c": [
+            2.254991,
+            0.249999672,
+            -0.708785,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "brace",
+        "id": 37,
+        "data": {
+          "size": 0.125,
+          "brace": 0,
+          "color": "#FFC486",
+          "name": "brace#37",
+          "_c": [
+            2.28788352,
+            0.0624995828,
+            -1.66052783,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "brace",
+        "id": 40,
+        "data": {
+          "size": 0.125,
+          "brace": 37,
+          "color": "#FFC486",
+          "name": "brace#40",
+          "_c": [
+            2.29596043,
+            0.0624996349,
+            -2.00764155,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "stud",
+        "id": 42,
+        "data": {
+          "radius": 0.25,
+          "shaftRadius": 0.125,
+          "height": 0.25,
+          "color": "#FFC486",
+          "shaftColor": "#FFEBC2",
+          "material": "wod",
+          "shaftMaterial": "stl",
+          "name": "stud#42",
+          "_c": [
+            3.33286357,
+            0.249999359,
+            -0.713427961,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "wrist",
+        "id": 44,
+        "data": {
+          "radius": 0.125,
+          "angle": 0.0,
+          "height": 0.25,
+          "axle": 0.25,
+          "color": "#FFC486",
+          "material": "stl",
+          "name": "wrist#44",
+          "_c": [
+            3.44670272,
+            0.249999762,
+            -1.32006526,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "spring",
+        "id": 46,
+        "data": {
+          "height": 0.625,
+          "spring": 20.0,
+          "damper": 0.1,
+          "charge": 0.0,
+          "radius": 0.125,
+          "bodyShape": 1,
+          "topColor": "#BF9558",
+          "bottomColor": "#BF9558",
+          "springColor": "#FFD6AF",
+          "material": "wod",
+          "name": "spring#46",
+          "_c": [
+            3.4338696,
+            0.3124997,
+            -1.72201264,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "wing",
+        "id": 48,
+        "data": {
+          "width": 0.5,
+          "height": 0.5,
+          "color": "#FFFFFF",
+          "name": "wing#48",
+          "_c": [
+            3.42180729,
+            0.2499996,
+            -2.25877,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "rocket",
+        "id": 51,
+        "data": {
+          "bodyShape": 0,
+          "height": 1.0,
+          "radius": 0.25,
+          "color": "#FFFFFF",
+          "material": "wod",
+          "inverted": false,
+          "thrust": 1.0,
+          "channel": 1,
+          "key": 63,
+          "name": "rocket#51",
+          "_c": [
+            4.49548769,
+            0.4999996,
+            -0.6347627,
+            1.82123392E-06,
+            180.0,
+            180.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "ring",
+        "id": 55,
+        "data": {
+          "segments": 24,
+          "topRadius": 0.5,
+          "bottomRadius": 0.5,
+          "topThickness": 0.25,
+          "bottomThickness": 0.25,
+          "arc": 360.0,
+          "arcOffset": 0.0,
+          "helix": 0.0,
+          "height": 0.25,
+          "snapPoint": 4,
+          "color": "#BF9558",
+          "material": "wod",
+          "name": "ring#55",
+          "_c": [
+            4.465262,
+            -2.816745E-07,
+            -1.575238,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "cam",
+        "id": 57,
+        "data": {
+          "segments": 32,
+          "radius": 0.25,
+          "thickness": 0.25,
+          "height": 0.25,
+          "curve": {
+            "keys": [
+              {
+                "time": 0.0,
+                "value": 0.0,
+                "inTangent": 0.0,
+                "outTangent": 0.0,
+                "inWeight": 0.0,
+                "outWeight": 0.6572935,
+                "mode": 1
+              },
+              {
+                "time": 0.5,
+                "value": 1.0,
+                "inTangent": 0.0,
+                "outTangent": 0.0,
+                "inWeight": 0.333333343,
+                "outWeight": 0.333333343,
+                "mode": 1
+              },
+              {
+                "time": 1.0,
+                "value": 0.0,
+                "inTangent": 0.0,
+                "outTangent": 0.0,
+                "inWeight": 0.653778553,
+                "outWeight": 0.0,
+                "mode": 1
+              }
+            ]
+          },
+          "color": "#BF9558",
+          "material": "wod",
+          "name": "cam#57",
+          "_c": [
+            4.593479,
+            0.124999166,
+            -2.64857435,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "grabber",
+        "id": 59,
+        "data": {
+          "width": 0.25,
+          "depth": 0.25,
+          "mode": 0,
+          "channel": 1,
+          "key": 36,
+          "name": "grabber#59",
+          "_c": [
+            5.421625,
+            0.0624998063,
+            -0.8390788,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "camera",
+        "id": 61,
+        "data": {
+          "lockZ": true,
+          "fov": 60,
+          "distance": 3.0,
+          "height": 20.0,
+          "around": 0.0,
+          "tilt": 0.0,
+          "roll": 0.0,
+          "yaw": 0.0,
+          "smooth": 0.5,
+          "key": 20,
+          "channel": 1,
+          "size": 3,
+          "name": "camera#61",
+          "_c": [
+            5.407352,
+            0.124999613,
+            -1.31660533,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "scenery",
+        "id": 63,
+        "data": {
+          "name": "scenery#63",
+          "_c": [
+            5.42304564,
+            0.124999583,
+            -1.74315333,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {},
+          "sun": {
+            "items": [
+              {
+                "key": "x",
+                "over": false,
+                "value": 70.0
+              },
+              {
+                "key": "y",
+                "over": false,
+                "value": 330.0
+              },
+              {
+                "key": "intensity",
+                "over": false,
+                "value": 1.0
+              },
+              {
+                "key": "color",
+                "over": false,
+                "value": "#FFF4D6"
+              }
+            ]
+          },
+          "skybox": {
+            "items": [
+              {
+                "key": "color",
+                "over": false,
+                "value": "#313233"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "text",
+        "id": 65,
+        "data": {
+          "text": "hi",
+          "size": 0.5,
+          "depth": 0.25,
+          "horizontal": 0.5,
+          "vertical": 0.0,
+          "color": "#BF9558",
+          "material": "brs",
+          "name": "text#65",
+          "_c": [
+            5.47943354,
+            0.124998972,
+            -2.8413713,
+            90.0,
+            90.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "relay",
+        "id": 67,
+        "data": {
+          "transmitter": {
+            "mode": 0,
+            "range": 0.5,
+            "offset": 0.0,
+            "targets": null
+          },
+          "inverted": false,
+          "analog": false,
+          "receiveChannel": 1,
+          "receiveKey": 0,
+          "sendChannel": 1,
+          "sendKey": 0,
+          "size": 3,
+          "name": "relay#67",
+          "_c": [
+            6.233749,
+            0.124999478,
+            -0.988102734,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "gate",
+        "id": 70,
+        "data": {
+          "transmitter": {
+            "mode": 0,
+            "range": 0.5,
+            "offset": 0.0,
+            "targets": null
+          },
+          "gate": 0,
+          "channel": 1,
+          "aKey": 0,
+          "bKey": 0,
+          "cKey": 0,
+          "size": 3,
+          "name": "gate#70",
+          "_c": [
+            6.23342657,
+            0.124999739,
+            -1.47810638,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "sensor",
+        "id": 73,
+        "data": {
+          "transmitter": {
+            "mode": 0,
+            "range": 0.5,
+            "offset": 0.0,
+            "targets": null
+          },
+          "distance": 1.0,
+          "analog": false,
+          "channel": 1,
+          "key": 0,
+          "size": 3,
+          "name": "sensor#73",
+          "_c": [
+            6.64498568,
+            0.124999709,
+            -0.9860066,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "light",
+        "id": 76,
+        "data": {
+          "color": "#DDDDDD",
+          "inverted": false,
+          "channel": 1,
+          "width": 0.5,
+          "height": 0.5,
+          "depth": 0.5,
+          "key": 1,
+          "name": "light#76",
+          "_c": [
+            6.34044743,
+            0.249998868,
+            -2.14497733,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "button",
+        "id": 80,
+        "data": {
+          "width": 0.375,
+          "height": 0.125,
+          "depth": 0.375,
+          "color": "#CE5353",
+          "draggable": false,
+          "channel": 1,
+          "key": 0,
+          "transmitter": {
+            "mode": 0,
+            "range": 0.5,
+            "offset": 0.0,
+            "targets": null
+          },
+          "name": "button#80",
+          "_c": [
+            6.26271963,
+            0.06249935,
+            -2.79031825,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {}
+        }
+      },
+      {
+        "key": "circuit",
+        "id": 82,
+        "data": {
+          "circuitId": "0bc5482a-8464-4775-bf9e-30dbf03f399c",
+          "speed": 10,
+          "transmitter": {
+            "mode": 0,
+            "range": 0.5,
+            "offset": 0.0,
+            "targets": null
+          },
+          "channel": 1,
+          "lastId": 0,
+          "name": "circuit#82",
+          "_c": [
+            6.660464,
+            0.124999143,
+            -1.45965564,
+            -6.83019E-06,
+            0.0,
+            0.0
+          ],
+          "_m": {},
+          "bridge": []
+        }
+      }
+    ]
+  },
+  "camera": {
+    "px": 4.2767396,
+    "py": 0.386407167,
+    "pz": -1.21067178,
+    "rx": 49.5571136,
+    "ry": 358.6111,
+    "rz": 8.225943e-8,
+    "zoom": 3.299997
+  },
+  "settings": {
+    "data": {
+      "advanced": true,
+      "scene": "",
+      "collisionDetectionMode": 2,
+      "physicsSteps": 6,
+      "dynamicPhysicsStep": false,
+      "limitless": false,
+      "handleGrid": 0.125,
+      "moveGrid": 0.125,
+      "rotateGrid": 15
+    }
+  },
+  "hub": {
+    "lastId": 3,
+    "channels": [
+      {
+        "id": 1,
+        "name": "global",
+        "color": "#FFE1B6",
+        "keyboard": true,
+        "global": false,
+        "isLocked": false
+      },
+      {
+        "id": 3,
+        "name": "private",
+        "color": "#FFFFFF",
+        "keyboard": false,
+        "global": false,
+        "isLocked": false
+      }
+    ],
+    "circuits": [
+      {
+        "id": "0bc5482a-8464-4775-bf9e-30dbf03f399c",
+        "name": "allData",
+        "elements": {
+          "lastId": 33,
+          "entities": [
+            {
+              "key": "toggle",
+              "id": 1,
+              "data": {
+                "layer": 0,
+                "position": {
+                  "x": -2,
+                  "y": 1
+                },
+                "rotation": 0,
+                "name": "toggle#1",
+                "value": false
+              }
+            },
+            {
+              "key": "button",
+              "id": 3,
+              "data": {
+                "layer": 0,
+                "position": {
+                  "x": -2,
+                  "y": 0
+                },
+                "rotation": 0,
+                "name": "button#3",
+                "color": "#DD0000",
+                "isDebug": true
+              }
+            },
+            {
+              "key": "func",
+              "id": 5,
+              "data": {
+                "layer": 0,
+                "position": {
+                  "x": -2,
+                  "y": -1
+                },
+                "rotation": 0,
+                "name": "func#5",
+                "func": "and",
+                "inCount": 2,
+                "outCount": 1,
+                "flip": false
+              }
+            },
+            {
+              "key": "light",
+              "id": 7,
+              "data": {
+                "layer": 0,
+                "position": {
+                  "x": -2,
+                  "y": -3
+                },
+                "rotation": 0,
+                "name": "light#7",
+                "color": "#FF6E00"
+              }
+            },
+            {
+              "key": "curve",
+              "id": 10,
+              "data": {
+                "layer": 0,
+                "position": {
+                  "x": 1,
+                  "y": 1
+                },
+                "rotation": 0,
+                "name": "curve#10",
+                "curve": {
+                  "keys": [
+                    {
+                      "time": 0,
+                      "value": 0,
+                      "inTangent": 0,
+                      "outTangent": 1,
+                      "inWeight": 0,
+                      "outWeight": 0,
+                      "mode": 1
+                    },
+                    {
+                      "time": 1,
+                      "value": 1,
+                      "inTangent": 1,
+                      "outTangent": 0,
+                      "inWeight": 0,
+                      "outWeight": 0,
+                      "mode": 1
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "key": "port",
+              "id": 12,
+              "data": {
+                "layer": 0,
+                "position": {
+                  "x": 1,
+                  "y": 0
+                },
+                "rotation": 0,
+                "name": "port#12",
+                "label": "a"
+              }
+            },
+            {
+              "key": "bus",
+              "id": 14,
+              "data": {
+                "layer": 0,
+                "position": {
+                  "x": 1,
+                  "y": -1
+                },
+                "rotation": 0,
+                "name": "bus#14",
+                "size": 1,
+                "flip": false
+              }
+            },
+            {
+              "key": "circuit",
+              "id": 18,
+              "data": {
+                "layer": 0,
+                "position": {
+                  "x": 1,
+                  "y": -2
+                },
+                "rotation": 0,
+                "name": "circuit#18",
+                "circuitId": ""
+              }
+            },
+            {
+              "key": "valve",
+              "id": 20,
+              "data": {
+                "layer": 0,
+                "position": {
+                  "x": 1,
+                  "y": -4
+                },
+                "rotation": 0,
+                "name": "valve#20",
+                "flip": false
+              }
+            },
+            {
+              "key": "time",
+              "id": 22,
+              "data": {
+                "layer": 0,
+                "position": {
+                  "x": 4,
+                  "y": 1
+                },
+                "rotation": 0,
+                "name": "time#22",
+                "speed": 1
+              }
+            },
+            {
+              "key": "clock",
+              "id": 24,
+              "data": {
+                "layer": 0,
+                "position": {
+                  "x": 4,
+                  "y": 0
+                },
+                "rotation": 0,
+                "name": "clock#24",
+                "off": 50,
+                "on": 50
+              }
+            },
+            {
+              "key": "constant",
+              "id": 26,
+              "data": {
+                "layer": 0,
+                "position": {
+                  "x": 4,
+                  "y": -1
+                },
+                "rotation": 0,
+                "name": "constant#26",
+                "value": 0
+              }
+            },
+            {
+              "key": "display",
+              "id": 28,
+              "data": {
+                "layer": 0,
+                "position": {
+                  "x": 4,
+                  "y": -2
+                },
+                "rotation": 0,
+                "name": "display#28"
+              }
+            },
+            {
+              "key": "via",
+              "id": 30,
+              "data": {
+                "layer": 0,
+                "position": {
+                  "x": 4,
+                  "y": -3
+                },
+                "rotation": 0,
+                "name": "via#30"
+              }
+            }
+          ]
+        },
+        "camera": {
+          "px": 3.639397,
+          "py": -0.4208374,
+          "zoom": 1.99999917
+        },
+        "ticksPerSecond": 1000,
+        "layer": 0,
+        "behind": 1,
+        "ahead": 1,
+        "selector": {
+          "items": []
+        },
+        "faceplate": {
+          "tiles": {
+            "lastId": 7,
+            "entities": [
+              {
+                "key": "fill",
+                "id": 1,
+                "data": {
+                  "position": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "rotation": 0,
+                  "name": "fill#1",
+                  "label": "",
+                  "color": "#888888"
+                }
+              },
+              {
+                "key": "light",
+                "id": 4,
+                "data": {
+                  "position": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "rotation": 0,
+                  "name": "light#4",
+                  "label": "",
+                  "color": "#DD0000"
+                }
+              },
+              {
+                "key": "pin",
+                "id": 6,
+                "data": {
+                  "position": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "rotation": 0,
+                  "name": "pin#6",
+                  "label": ""
+                }
+              }
+            ]
+          },
+          "camera": {
+            "px": 0,
+            "py": 0,
+            "zoom": 2
+          },
+          "selector": {
+            "items": [
+              {
+                "value": 6
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "selector": {
+    "items": []
+  }
+}
