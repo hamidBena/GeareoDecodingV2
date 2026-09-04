@@ -381,3 +381,87 @@ func (e CircuitEntity) MarshalJSON() ([]byte, error) {
 		Data CircuitEntityData `json:"data"`
 	}{e.Key, e.ID, e.Data})
 }
+
+func (e *CircuitEntity) Offset(X, Y int) {
+	offX := float64(X)
+	offY := float64(Y)
+
+	switch data := e.Data.(type) {
+	case ToggleData:
+		data.Position.X += offX
+		data.Position.Y += offY
+		e.Data = data
+
+	case ButtonData:
+		data.Position.X += offX
+		data.Position.Y += offY
+		e.Data = data
+
+	case FuncData:
+		data.Position.X += offX
+		data.Position.Y += offY
+		e.Data = data
+
+	case LightData:
+		data.Position.X += offX
+		data.Position.Y += offY
+		e.Data = data
+
+	case CurveData:
+		data.Position.X += offX
+		data.Position.Y += offY
+		e.Data = data
+
+	case PortData:
+		data.Position.X += offX
+		data.Position.Y += offY
+		e.Data = data
+
+	case BusData:
+		data.Position.X += offX
+		data.Position.Y += offY
+		e.Data = data
+
+	case CircuitRefData:
+		data.Position.X += offX
+		data.Position.Y += offY
+		e.Data = data
+
+	case ValveData:
+		data.Position.X += offX
+		data.Position.Y += offY
+		e.Data = data
+
+	case TimeData:
+		data.Position.X += offX
+		data.Position.Y += offY
+		e.Data = data
+
+	case ClockData:
+		data.Position.X += offX
+		data.Position.Y += offY
+		e.Data = data
+
+	case ConstantData:
+		data.Position.X += offX
+		data.Position.Y += offY
+		e.Data = data
+
+	case DisplayData:
+		data.Position.X += offX
+		data.Position.Y += offY
+		e.Data = data
+
+	case ViaData:
+		data.Position.X += offX
+		data.Position.Y += offY
+		e.Data = data
+
+	case WireData:
+		data.Position.X += offX
+		data.Position.Y += offY
+		data.End.X += offX
+		data.End.Y += offY
+		e.Data = data
+	}
+}

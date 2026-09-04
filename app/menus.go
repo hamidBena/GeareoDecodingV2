@@ -1,7 +1,7 @@
 // app/menus.go
 package app
 
-type MenuID string
+/*type MenuID string
 
 const (
 	MenuMain           MenuID = "main"
@@ -56,3 +56,4 @@ var menus = map[MenuID]MenuDef{
 		},
 	},
 }
+*/

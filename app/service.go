@@ -53,7 +53,15 @@ func (s *Service) GetCircuit(input string) (*model.Circuit, error) {
 	return s.saveEditor.GetCircuitByName(input)
 }
 
-func (s *Service) ExportCircuit(circuitIndex int, path string) error {
+func (s *Service) ExportCircuit(circuitIndex int) error {
+	path, err := utils.SaveOutputFile()
+	if err != nil {
+		return fmt.Errorf("save output file: %w", err)
+	}
+	return s.exportCircuit(circuitIndex, path)
+}
+
+func (s *Service) exportCircuit(circuitIndex int, path string) error {
 	// this doesn't solve the diamond relation case but it works, not efficent but if it works do NOT touch it
 	circuit, err := s.saveEditor.GetCircuitByIndex(circuitIndex)
 	if err != nil {
@@ -79,7 +87,7 @@ func (s *Service) ExportCircuit(circuitIndex int, path string) error {
 				return fmt.Errorf("get subcircuit index: %w", err)
 			}
 
-			if err := s.ExportCircuit(index, subPath); err != nil {
+			if err := s.exportCircuit(index, subPath); err != nil {
 				return fmt.Errorf("export subcircuit %s: %w", subCircuit.Name, err)
 			}
 		}
@@ -93,7 +101,15 @@ func (s *Service) ExportCircuit(circuitIndex int, path string) error {
 	return utils.WriteFile(path, circuitData)
 }
 
-func (s *Service) ImportCircuit(paths []string) error {
+func (s *Service) ImportCircuit() error {
+	paths, err := utils.OpenSaveFiles()
+	if err != nil {
+		return fmt.Errorf("select circuit files: %w", err)
+	}
+	return s.importCircuit(paths)
+}
+
+func (s *Service) importCircuit(paths []string) error {
 	// Pass 1: load every circuit, decide its final ID, build the old->new ID map
 	circuits := make([]*model.Circuit, 0, len(paths))
 	idMap := make(map[string]string) // old ID -> new ID
@@ -132,6 +148,55 @@ func (s *Service) ImportCircuit(paths []string) error {
 	return nil
 }
 
+func (s *Service) EmbedCircuit(circuitIndex int, offsetX, offsetY int) error {
+	path, err := utils.OpenSaveFile()
+	if err != nil {
+		return fmt.Errorf("select save file: %w", err)
+	}
+
+	raw, err := os.ReadFile(path)
+	if err != nil {
+		return fmt.Errorf("read save file: %w", err)
+	}
+
+	circuit := &model.Circuit{}
+	if err := json.Unmarshal(raw, circuit); err != nil {
+		return fmt.Errorf("parse circuit file: %w", err)
+	}
+
+	return s.embedCircuit(circuitIndex, circuit, offsetX, offsetY)
+}
+
+func (s *Service) embedCircuit(circuitIndex int, circuitData *model.Circuit, offsetX, offsetY int) error {
+	circuit, err := s.saveEditor.GetCircuitByIndex(circuitIndex)
+	if err != nil {
+		return fmt.Errorf("%w", err)
+	}
+
+	for i := range circuitData.Elements.Entities {
+		circuitData.Elements.Entities[i].Offset(offsetX, offsetY)
+	}
+
+	circuit.Elements.Entities = append(circuit.Elements.Entities, circuitData.Elements.Entities...)
+	circuit.Elements.LastID += circuitData.Elements.LastID
+	return nil
+}
+
+func (s *Service) ExportSaveFile() error {
+	rawData, err := json.MarshalIndent(s.saveEditor.SaveFile, "", "  ")
+	if err != nil {
+		return fmt.Errorf("marshal save file: %w", err)
+	}
+
+	path, err := utils.SaveOutputFile()
+
+	if err != nil {
+		return fmt.Errorf("save output file: %w", err)
+	}
+
+	return utils.WriteFile(path, rawData)
+}
+
 func (s *Service) remapSubCircuitReferences(circuit *model.Circuit, idMap map[string]string) {
 	for i := range circuit.Elements.Entities {
 		ref, ok := circuit.Elements.Entities[i].Data.(model.CircuitRefData)
@@ -143,6 +208,41 @@ func (s *Service) remapSubCircuitReferences(circuit *model.Circuit, idMap map[st
 			circuit.Elements.Entities[i].Data = ref // write the modified value back
 		}
 	}
+}
+
+func (s *Service) RenameCircuit(circuitIndex int, newName string) error {
+	circuit, err := s.saveEditor.GetCircuitByIndex(circuitIndex)
+	if err != nil {
+		return fmt.Errorf("get circuit: %w", err)
+	}
+	circuit.Name = newName
+	return nil
+}
+
+func (s *Service) CreateCircuit(name string) error {
+	if strings.TrimSpace(name) == "" {
+		return fmt.Errorf("circuit name cannot be empty")
+	}
+
+	for _, circuit := range s.saveEditor.SaveFile.Hub.Circuits {
+		if circuit.Name == name {
+			return fmt.Errorf("a circuit named %q already exists", name)
+		}
+	}
+
+	circuit := &model.Circuit{
+		ID:   uuid.NewString(),
+		Name: name,
+		Elements: model.Elements{
+			Entities: []model.CircuitEntity{},
+		},
+	}
+
+	if err := s.saveEditor.ImportCircuit(circuit); err != nil {
+		return fmt.Errorf("create circuit: %w", err)
+	}
+
+	return nil
 }
 
 func (s *Service) SaveFile() error {
@@ -221,6 +321,19 @@ func samePathComponent(actual string, expected string) bool {
 		return strings.EqualFold(actual, expected)
 	}
 	return actual == expected
+}
+
+func (s *Service) ReloadFile() error {
+	return s.loadSaveFile(s.saveEditor.SaveFile.Path)
+}
+
+func (s *Service) loadSaveFile(path string) error {
+	newEditor, err := world.NewSaveEditor(path)
+	if err != nil {
+		return fmt.Errorf("create save editor: %w", err)
+	}
+	s.saveEditor = newEditor
+	return nil
 }
 
 func (s *Service) GetBackupFiles() ([]string, error) {

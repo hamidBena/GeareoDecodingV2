@@ -45,6 +45,9 @@ func (se *SaveEditor) GetSubCircuitIDs(circuit *model.Circuit) ([]string, error)
 	var ids []string
 	for _, part := range circuit.Elements.Entities {
 		if subCircuit, ok := part.Data.(model.CircuitRefData); ok {
+			if( subCircuit.CircuitID == "") {
+				continue // skip empty circuit IDs
+			}
 			ids = append(ids, subCircuit.CircuitID)
 		}
 	}

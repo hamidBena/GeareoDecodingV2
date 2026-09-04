@@ -1,38 +1,20 @@
 package main
 
 import (
+	UI "GDv2/ui/fyne"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/layout"
-	"fyne.io/fyne/v2/widget"
 )
 
 func main() {
 	myApp := app.New()
-	myWindow := myApp.NewWindow("DocTabs Container")
+	myWindow := myApp.NewWindow("Geareo Save Editor")
 
-	tab1 := container.NewVBox()
+	// Initially show an open-file view.
+	myWindow.SetContent(UI.NewOpenFileView(myWindow))
 
-	tab1.Add(widget.NewLabel("This is the content of Tab 1"))
-
-	wid1 := widget.NewLabel("name: ")
-	val1 := widget.NewEntry()
-	wid2 := widget.NewLabel("age: ")
-	val2 := widget.NewEntry()
-	tab1.Add(container.New(layout.NewFormLayout(), wid1, val1, wid2, val2))
-
-	tabs := container.NewDocTabs(
-		container.NewTabItem("Doc 1", widget.NewLabel("Content of document 1")),
-		container.NewTabItem("Doc 2", widget.NewForm(
-			widget.NewFormItem("Name", widget.NewEntry()),
-			widget.NewFormItem("Age", widget.NewEntry()),
-		)),
-		container.NewTabItem("Doc 3", tab1),
-	)
-
-	myWindow.SetContent(tabs)
-	myWindow.Resize(fyne.NewSize(400, 300))
+	myWindow.Resize(fyne.NewSize(1000, 800))
 	myWindow.ShowAndRun()
 }
 
