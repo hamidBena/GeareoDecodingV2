@@ -16,3 +16,11 @@ func main() {
 	myWindow.Resize(fyne.NewSize(1200, 800))
 	myWindow.ShowAndRun()
 }
+
+
+/*
+windows go build -ldflags "-H=windowsgui" -o GDv2.exe .
+
+linux 
+
+*/

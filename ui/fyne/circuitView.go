@@ -85,15 +85,10 @@ func newCircuitView(service *app.Service, window fyne.Window, circuits []*model.
 }
 
 func (view *circuitView) layout() fyne.CanvasObject {
-	displayIcon, err := utils.LoadIcon("builds/assets/display.png")
-	if err != nil {
-		return widget.NewLabel("Could not load display icon: " + err.Error())
-	}
+	displayIcon, _ := utils.LoadIcon("assets/display.png")
+	romIcon, _ := utils.LoadIcon("assets/rom.png")
 
-	romIcon, err := utils.LoadIcon("builds/assets/rom.png")
-	if err != nil {
-		return widget.NewLabel("Could not load ROM icon: " + err.Error())
-	}
+	//ignore the icons error for now for ease of debugging
 
 	operations := container.NewVBox(
 		widget.NewLabel("Circuit operations"),
