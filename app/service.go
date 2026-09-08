@@ -3,6 +3,7 @@ package app
 import (
 	"GDv2/utils"
 	"GDv2/world"
+	autoBuilder "GDv2/world/circuitBuilders"
 	"GDv2/world/model"
 	"encoding/json"
 	"fmt"
@@ -174,11 +175,13 @@ func (s *Service) embedCircuit(circuitIndex int, circuitData *model.Circuit, off
 	}
 
 	for i := range circuitData.Elements.Entities {
-		circuitData.Elements.Entities[i].Offset(offsetX, offsetY)
+		entity := &circuitData.Elements.Entities[i]
+		entity.Offset(offsetX, offsetY)
+		entity.ID = circuit.Elements.LastID + i
 	}
 
 	circuit.Elements.Entities = append(circuit.Elements.Entities, circuitData.Elements.Entities...)
-	circuit.Elements.LastID += circuitData.Elements.LastID
+	circuit.Elements.LastID += len(circuitData.Elements.Entities)
 	return nil
 }
 
@@ -499,6 +502,56 @@ func (s *Service) DeleteCircuit(circuitIndex int) error {
 
 	if err := s.saveEditor.DeleteCircuit(circuit); err != nil {
 		return fmt.Errorf("delete circuit: %w", err)
+	}
+	return nil
+}
+
+// auto builders
+
+func (s *Service) BuildDisplayCircuit(circuitIndex int, position model.Position2D, width, height int) error {
+	circuit, err := s.saveEditor.GetCircuitByIndex(circuitIndex)
+	if err != nil {
+		return fmt.Errorf("get target circuit: %w", err)
+	}
+
+	builder := autoBuilder.DisplayCircuit{
+		Position: position,
+		Width:    width,
+		Height:   height,
+	}
+	if err := builder.Build(circuit, s.saveEditor); err != nil {
+		return fmt.Errorf("build display circuit: %w", err)
+	}
+
+	return nil
+}
+
+func (s *Service) BuildROMCircuit(circuitIndex int, position model.Position2D, cellCount, layer int, dataFile string) error {
+	circuit, err := s.saveEditor.GetCircuitByIndex(circuitIndex)
+	if err != nil {
+		return fmt.Errorf("get target circuit: %w", err)
+	}
+
+	data := []*float64(nil)
+	if dataFile != "" {
+		data, err = utils.LoadCSV(dataFile)
+		if err != nil {
+			return fmt.Errorf("load ROM data: %w", err)
+		}
+	}
+
+	if data != nil && len(data) > cellCount {
+		return fmt.Errorf("not enough data for ROM circuit: expected %d, got %d", cellCount, len(data))
+	}
+
+	builder := autoBuilder.ROMCircuit{
+		Position:  position,
+		CellCount: cellCount,
+		Layer:     layer,
+		Data:      data,
+	}
+	if err := builder.Build(circuit, s.saveEditor); err != nil {
+		return fmt.Errorf("build ROM circuit: %w", err)
 	}
 	return nil
 }

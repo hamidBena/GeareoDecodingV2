@@ -11,7 +11,13 @@
 - Import/export for circuits, including **multi-file import with two-pass ID remapping** (so sub-circuit references survive collisions)
 - Validation system (`ValidateSavefile` / `validateCircuit`) — duplicate ID detection, broken sub-circuit reference detection
 
-This is the hard part. Everything below builds on top of a working foundation.
+
+
+
+
+avg of pixel over time
+
+
 
 ---
 

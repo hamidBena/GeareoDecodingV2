@@ -141,8 +141,21 @@ type CircuitEntityDataBase struct {
 }
 
 type Position2D struct {
-	X float64 `json:"x"`
-	Y float64 `json:"y"`
+	X int `json:"x"`
+	Y int `json:"y"`
+}
+
+func (p Position2D) Add(other Position2D) Position2D {
+	return Position2D{
+		X: p.X + other.X,
+		Y: p.Y + other.Y,
+	}
+}
+func (p Position2D) Sub(other Position2D) Position2D {
+	return Position2D{
+		X: p.X - other.X,
+		Y: p.Y - other.Y,
+	}
 }
 
 //entities and their data bodies, and the isCircuitEntityData method to satisfy the interface
@@ -383,8 +396,8 @@ func (e CircuitEntity) MarshalJSON() ([]byte, error) {
 }
 
 func (e *CircuitEntity) Offset(X, Y int) {
-	offX := float64(X)
-	offY := float64(Y)
+	offX := X
+	offY := Y
 
 	switch data := e.Data.(type) {
 	case ToggleData:
@@ -460,8 +473,197 @@ func (e *CircuitEntity) Offset(X, Y int) {
 	case WireData:
 		data.Position.X += offX
 		data.Position.Y += offY
-		data.End.X += offX
-		data.End.Y += offY
 		e.Data = data
 	}
+}
+
+func newEntity(key string, data CircuitEntityData) CircuitEntity {
+	return CircuitEntity{
+		Key:  key,
+		Data: data,
+	}
+}
+
+func newBase(position Position2D, rotation Direction) CircuitEntityDataBase {
+	return newBaseWithLayer(position, rotation, 0)
+}
+
+func newBaseWithLayer(position Position2D, rotation Direction, layer int) CircuitEntityDataBase {
+	return CircuitEntityDataBase{
+		Layer:    layer,
+		Position: position,
+		Rotation: rotation,
+	}
+}
+
+func NewToggle(position Position2D, rotation Direction, value bool) CircuitEntity {
+	return NewToggleWithLayer(position, rotation, value, 0)
+}
+
+func NewToggleWithLayer(position Position2D, rotation Direction, value bool, layer int) CircuitEntity {
+	return newEntity(KeyToggle, ToggleData{
+		CircuitEntityDataBase: newBaseWithLayer(position, rotation, layer),
+		Value:                 value,
+	})
+}
+
+func NewButton(position Position2D, rotation Direction, isDebug bool) CircuitEntity {
+	return NewButtonWithLayer(position, rotation, isDebug, 0)
+}
+
+func NewButtonWithLayer(position Position2D, rotation Direction, isDebug bool, layer int) CircuitEntity {
+	return newEntity(KeyButton, ButtonData{
+		CircuitEntityDataBase: newBaseWithLayer(position, rotation, layer),
+		Color:                 "#DD0000",
+		IsDebug:               isDebug,
+	})
+}
+
+func NewFunc(position Position2D, rotation Direction, function FunctionType, inCount int) CircuitEntity {
+	return NewFuncWithLayer(position, rotation, function, inCount, 0)
+}
+
+func NewFuncWithLayer(position Position2D, rotation Direction, function FunctionType, inCount, layer int) CircuitEntity {
+	return newEntity(KeyFunc, FuncData{
+		CircuitEntityDataBase: newBaseWithLayer(position, rotation, layer),
+		Func:                  function,
+		InCount:               inCount,
+		OutCount:              1,
+	})
+}
+
+func NewLight(position Position2D, rotation Direction, color string) CircuitEntity {
+	return NewLightWithLayer(position, rotation, color, 0)
+}
+
+func NewLightWithLayer(position Position2D, rotation Direction, color string, layer int) CircuitEntity {
+	return newEntity(KeyLight, LightData{
+		CircuitEntityDataBase: newBaseWithLayer(position, rotation, layer),
+		Color:                 color,
+	})
+}
+
+func NewCurve(position Position2D, rotation Direction, curve Curve) CircuitEntity {
+	return NewCurveWithLayer(position, rotation, curve, 0)
+}
+
+func NewCurveWithLayer(position Position2D, rotation Direction, curve Curve, layer int) CircuitEntity {
+	return newEntity(KeyCurve, CurveData{
+		CircuitEntityDataBase: newBaseWithLayer(position, rotation, layer),
+		Curve:                 curve,
+	})
+}
+
+func NewPort(position Position2D, rotation Direction, label string) CircuitEntity {
+	return NewPortWithLayer(position, rotation, label, 0)
+}
+
+func NewPortWithLayer(position Position2D, rotation Direction, label string, layer int) CircuitEntity {
+	return newEntity(KeyPort, PortData{
+		CircuitEntityDataBase: newBaseWithLayer(position, rotation, layer),
+		Label:                 label,
+	})
+}
+
+func NewBus(position Position2D, rotation Direction, size int, flip bool) CircuitEntity {
+	return NewBusWithLayer(position, rotation, size, flip, 0)
+}
+
+func NewBusWithLayer(position Position2D, rotation Direction, size int, flip bool, layer int) CircuitEntity {
+	return newEntity(KeyBus, BusData{
+		CircuitEntityDataBase: newBaseWithLayer(position, rotation, layer),
+		Size:                  size,
+		Flip:                  flip,
+	})
+}
+
+func NewCircuitRef(position Position2D, rotation Direction, circuitID string) CircuitEntity {
+	return NewCircuitRefWithLayer(position, rotation, circuitID, 0)
+}
+
+func NewCircuitRefWithLayer(position Position2D, rotation Direction, circuitID string, layer int) CircuitEntity {
+	return newEntity(KeyCircuit, CircuitRefData{
+		CircuitEntityDataBase: newBaseWithLayer(position, rotation, layer),
+		CircuitID:             circuitID,
+	})
+}
+
+func NewValve(position Position2D, rotation Direction, flip bool) CircuitEntity {
+	return NewValveWithLayer(position, rotation, flip, 0)
+}
+
+func NewValveWithLayer(position Position2D, rotation Direction, flip bool, layer int) CircuitEntity {
+	return newEntity(KeyValve, ValveData{
+		CircuitEntityDataBase: newBaseWithLayer(position, rotation, layer),
+		Flip:                  flip,
+	})
+}
+
+func NewTime(position Position2D, rotation Direction, speed float64) CircuitEntity {
+	return NewTimeWithLayer(position, rotation, speed, 0)
+}
+
+func NewTimeWithLayer(position Position2D, rotation Direction, speed float64, layer int) CircuitEntity {
+	return newEntity(KeyTime, TimeData{
+		CircuitEntityDataBase: newBaseWithLayer(position, rotation, layer),
+		Speed:                 speed,
+	})
+}
+
+func NewClock(position Position2D, rotation Direction, off, on int) CircuitEntity {
+	return NewClockWithLayer(position, rotation, off, on, 0)
+}
+
+func NewClockWithLayer(position Position2D, rotation Direction, off, on, layer int) CircuitEntity {
+	return newEntity(KeyClock, ClockData{
+		CircuitEntityDataBase: newBaseWithLayer(position, rotation, layer),
+		Off:                   off,
+		On:                    on,
+	})
+}
+
+func NewConstant(position Position2D, rotation Direction, value float64) CircuitEntity {
+	return NewConstantWithLayer(position, rotation, value, 0)
+}
+
+func NewConstantWithLayer(position Position2D, rotation Direction, value float64, layer int) CircuitEntity {
+	return newEntity(KeyConstant, ConstantData{
+		CircuitEntityDataBase: newBaseWithLayer(position, rotation, layer),
+		Value:                 value,
+	})
+}
+
+func NewDisplay(position Position2D, rotation Direction) CircuitEntity {
+	return NewDisplayWithLayer(position, rotation, 0)
+}
+
+func NewDisplayWithLayer(position Position2D, rotation Direction, layer int) CircuitEntity {
+	return newEntity(KeyDisplay, DisplayData{
+		CircuitEntityDataBase: newBaseWithLayer(position, rotation, layer),
+	})
+}
+
+func NewVia(position Position2D, rotation Direction) CircuitEntity {
+	return NewViaWithLayer(position, rotation, 0)
+}
+
+func NewViaWithLayer(position Position2D, rotation Direction, layer int) CircuitEntity {
+	return newEntity(KeyVia, ViaData{
+		CircuitEntityDataBase: newBaseWithLayer(position, rotation, layer),
+	})
+}
+
+func NewWire(start, end Position2D) CircuitEntity {
+	return NewWireWithLayer(start, end, 0)
+}
+
+func NewWireWithLayer(start, end Position2D, layer int) CircuitEntity {
+	diff := Position2D{
+		X: end.X - start.X,
+		Y: end.Y - start.Y,
+	}
+	return newEntity(KeyWire, WireData{
+		CircuitEntityDataBase: newBaseWithLayer(start, Right, layer),
+		End:                   diff,
+	})
 }

@@ -31,6 +31,15 @@ func SaveOutputFile() (string, error) {
 	)
 }
 
+func OpenCSV() (string, error) {
+	return zenity.SelectFile(
+		zenity.Title("Select ROM data file"),
+		zenity.FileFilters{
+			{Name: "CSV files", Patterns: []string{"*.csv", "*.txt"}},
+		},
+	)
+}
+
 func defaultProjectsDir() string {
 	home, err := os.UserHomeDir()
 	if err != nil {

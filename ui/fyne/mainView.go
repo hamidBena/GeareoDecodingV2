@@ -9,85 +9,99 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
+type mainView struct {
+	service     *app.Service
+	window      fynecanvas.Window
+	tabsContent *fynecanvas.Container
+}
+
 func NewMainView(service *app.Service, window fynecanvas.Window) fynecanvas.CanvasObject {
-	tabsContent := container.NewStack()
-	var refreshTabs func()
-
-	refreshTabs = func() {
-		tabs := container.NewDocTabs(
-			container.NewTabItem("Circuits", NewCircuitView(service, window)),
-			container.NewTabItem("File", NewSaveFileView(service, window, refreshTabs)),
-			// container.NewTabItem("Validation", NewValidationView(service, window)),
-		)
-
-		tabsContent.Objects = []fynecanvas.CanvasObject{tabs}
-		tabsContent.Refresh()
+	view := &mainView{
+		service:     service,
+		window:      window,
+		tabsContent: container.NewStack(),
 	}
+	return view.layout()
+}
 
-	saveButton := widget.NewButton("Save", func() {
-		if err := service.SaveFile(); err != nil {
-			dialog.ShowError(err, window)
-			return
-		}
+func (view *mainView) layout() fynecanvas.CanvasObject {
+	toolbar := container.NewHBox(
+		widget.NewButton("Save", view.save),
+		widget.NewButton("Exit", view.exit),
+		widget.NewButton("Reload file", view.reload),
+	)
+	view.refreshTabs()
+	return container.NewBorder(toolbar, nil, nil, nil, view.tabsContent)
+}
 
-		dialog.ShowInformation("Saved", "Save file written successfully.", window)
-	})
+func (view *mainView) refreshTabs() {
+	tabs := container.NewDocTabs(
+		container.NewTabItem("Circuits", NewCircuitView(view.service, view.window)),
+		container.NewTabItem("File", NewSaveFileView(view.service, view.window, view.refreshTabs)),
+		// container.NewTabItem("Validation", NewValidationView(service, window)),
+	)
 
-	exitButton := widget.NewButton("Exit", func() {
-		dialog.NewConfirm(
-			"Confirm save and exit",
-			"Do you want to save changes before exiting?",
-			func(confirmed bool) {
-				if confirmed {
-					if err := service.SaveFile(); err != nil {
-						dialog.NewConfirm(
-							"Save failed",
-							"Could not save the file. Exit without saving?",
-							func(exitAnyway bool) {
-								if exitAnyway {
-									window.Close()
-								}
-							},
-							window,
-						).Show()
+	view.tabsContent.Objects = []fynecanvas.CanvasObject{tabs}
+	view.tabsContent.Refresh()
+}
 
-						return
-					}
-				}
+func (view *mainView) save() {
+	if err := view.service.SaveFile(); err != nil {
+		dialog.ShowError(err, view.window)
+		return
+	}
+	dialog.ShowInformation("Saved", "Save file written successfully.", view.window)
+}
 
-				window.Close()
-			},
-			window,
-		).Show()
-	})
+func (view *mainView) exit() {
+	dialog.NewConfirm(
+		"Confirm save and exit",
+		"Do you want to save changes before exiting?",
+		func(confirmed bool) {
+			if confirmed {
+				if err := view.service.SaveFile(); err != nil {
+					dialog.NewConfirm(
+						"Save failed",
+						"Could not save the file. Exit without saving?",
+						func(exitAnyway bool) {
+							if exitAnyway {
+								view.window.Close()
+							}
+						},
+						view.window,
+					).Show()
 
-	reloadButton := widget.NewButton("Reload file", func() {
-		dialog.NewConfirm(
-			"Confirm reload",
-			"Do you want to reload the file? All unsaved changes will be lost.",
-			func(confirmed bool) {
-				if !confirmed {
 					return
 				}
+			}
 
-				if err := service.ReloadFile(); err != nil {
-					dialog.ShowError(err, window)
-					return
-				}
+			view.window.Close()
+		},
+		view.window,
+	).Show()
+}
 
-				refreshTabs()
-				dialog.ShowInformation(
-					"Reloaded",
-					"Save file reloaded successfully.",
-					window,
-				)
-			},
-			window,
-		).Show()
-	})
+func (view *mainView) reload() {
+	dialog.NewConfirm(
+		"Confirm reload",
+		"Do you want to reload the file? All unsaved changes will be lost.",
+		func(confirmed bool) {
+			if !confirmed {
+				return
+			}
 
-	toolbar := container.NewHBox(saveButton, exitButton, reloadButton)
-	refreshTabs()
+			if err := view.service.ReloadFile(); err != nil {
+				dialog.ShowError(err, view.window)
+				return
+			}
 
-	return container.NewBorder(toolbar, nil, nil, nil, tabsContent)
+			view.refreshTabs()
+			dialog.ShowInformation(
+				"Reloaded",
+				"Save file reloaded successfully.",
+				view.window,
+			)
+		},
+		view.window,
+	).Show()
 }

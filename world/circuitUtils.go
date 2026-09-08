@@ -60,10 +60,17 @@ func (se *SaveEditor) DeleteCircuit(circuit *model.Circuit) error {
 	return nil
 }
 
-func (se *SaveEditor) AddPartToCircuit(circuit *model.Circuit, part *model.CircuitEntity) error {
-	circuit.Elements.LastID++
-	part.ID = circuit.Elements.LastID
+func (se *SaveEditor) AddPartToCircuit(circuit *model.Circuit, part model.CircuitEntity) error {
+	if circuit == nil {
+		return fmt.Errorf("circuit is nil")
+	}
+	if part.Key == "" {
+		return fmt.Errorf("part key is empty")
+	}
 
+	part.ID = circuit.Elements.LastID
+	circuit.Elements.LastID++
+
+	circuit.Elements.Entities = append(circuit.Elements.Entities, part)
 	return nil
-	
 }
